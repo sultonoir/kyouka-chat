@@ -88,7 +88,11 @@ const LoginForm = () => {
       <div className="grid grid-cols-2 gap-6">
         <Button
           variant="outline"
-          onClick={() => signIn("github")}
+          onClick={() =>
+            signIn("github", {
+              redirect: false,
+            })
+          }
         >
           <Icons.gitHub className="mr-2 h-4 w-4" />
           Github
