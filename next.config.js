@@ -8,6 +8,9 @@ const nextConfig = {
       "utfs.io",
     ],
   },
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client", "bcryptjs"],
+  },
 };
 
 module.exports = nextConfig;
