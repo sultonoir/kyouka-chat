@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -88,7 +87,7 @@ const LoginForm = () => {
       <div className="grid grid-cols-2 gap-6">
         <Button
           variant="outline"
-          onClick={() => signIn("github", {})}
+          onClick={() => void signIn("github")}
         >
           <Icons.gitHub className="mr-2 h-4 w-4" />
           Github
