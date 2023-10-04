@@ -5,7 +5,6 @@ import { LogOutIcon, Users2 } from "lucide-react";
 import React from "react";
 import { api } from "@/lib/client";
 import useProfile from "@/hooks/useProfile";
-import AddChat from "../chat/AddChat";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { signOut } from "next-auth/react";
@@ -35,12 +34,11 @@ const NavbarUI = () => {
           size={"icon"}
           variant={"ghost"}
           className="rounded-full hover:bg-default-100"
+          title="create group"
           onClick={group.onOpen}
         >
           <Users2 className="dark:text-iconnav" />
         </Button>
-
-        <AddChat />
         <Button
           variant={"ghost"}
           className="rounded-full hover:bg-default-100"

@@ -1,10 +1,11 @@
+"use client";
 import HomeClient from "@/components/shared/HomeClient";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import LandingPage from "@/components/session/LandingPage";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
+import LandingPage from "@/components/session/LandingPage";
+import { useSession } from "next-auth/react";
+
+export default function Home() {
+  const session = useSession();
 
   return (
     <div className="container mx-auto">
