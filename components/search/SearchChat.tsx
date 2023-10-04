@@ -3,7 +3,6 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { SearchIcon } from "lucide-react";
 import useSearch from "@/hooks/useSearch";
-import { useDebounce } from "use-debounce";
 import { api } from "@/lib/client";
 import DetailsMember from "../shared/DetailsMember";
 import useGroupChat from "@/hooks/useGroupChat";
@@ -17,11 +16,7 @@ const SearchChat = () => {
     search.onSearch(e.target.value);
   };
 
-  const [debouncedQuery] = useDebounce<string>(query, 1000);
-
-  const { data } = api.user.findMany.useQuery({
-    query: debouncedQuery,
-  });
+  const { data, mutate } = api.user.findMany.useMutation({});
 
   const ctx = api.useContext();
   const groupChat = useGroupChat();
@@ -54,6 +49,11 @@ const SearchChat = () => {
         />
         <Button
           size="icon"
+          onClick={() => {
+            mutate({
+              query,
+            });
+          }}
           className="bg-transparent hover:bg-transparent"
         >
           <SearchIcon className="text-iconnav" />

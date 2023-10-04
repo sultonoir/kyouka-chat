@@ -282,7 +282,7 @@ export const apiUser = createTRPCRouter({
         query: z.string(),
       })
     )
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { query } = input;
       if (!query) {
         throw new TRPCError({ code: "BAD_REQUEST", message: "no query" });
