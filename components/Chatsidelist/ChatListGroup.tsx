@@ -1,23 +1,20 @@
-import { type Content, type Group, type User } from "@prisma/client";
+import { type Group } from "@prisma/client";
 import React from "react";
 import useFriend from "@/hooks/useFriend";
 import DetailsMember from "../shared/DetailsMember";
 import useGroupChat from "@/hooks/useGroupChat";
+import { api } from "@/lib/client";
 
 interface Props {
   group: Group | null;
-  content:
-    | Array<
-        Content & {
-          user: User;
-        }
-      >
-    | null
-    | undefined;
-  memberId: string;
+  memberId: string | null | undefined;
 }
 
-const ChatListGroup = ({ group, content, memberId }: Props) => {
+const ChatListGroup = ({ group, memberId }: Props) => {
+  const { data } = api.grup.getGroup.useQuery({
+    groupId: group?.id || "",
+  });
+  const content = data?.conten;
   const lastChat = content && content[content?.length - 1];
   const groupChat = useGroupChat();
   const personalChat = useFriend();
@@ -31,7 +28,10 @@ const ChatListGroup = ({ group, content, memberId }: Props) => {
       sendAt={lastChat?.updatedAt || new Date()}
       active={groupChat.isOpen}
       onClick={() => {
-        groupChat.onOpen({ groupId: group?.id || "", memberId: memberId });
+        groupChat.onOpen({
+          groupId: group?.id || "",
+          memberId: memberId as string,
+        });
         personalChat.onClose();
       }}
     />

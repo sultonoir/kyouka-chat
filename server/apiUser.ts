@@ -22,29 +22,8 @@ export const apiUser = createTRPCRouter({
         },
         member: {
           include: {
-            group: {
-              include: {
-                conten: {
-                  include: {
-                    user: true,
-                  },
-                },
-                member: {
-                  include: {
-                    user: true,
-                  },
-                },
-              },
-            },
-            chat: {
-              include: {
-                content: {
-                  include: {
-                    user: true,
-                  },
-                },
-              },
-            },
+            group: true,
+            chat: true,
             user: true,
           },
           orderBy: {
@@ -221,44 +200,6 @@ export const apiUser = createTRPCRouter({
         const getFriend = await ctx.prisma.user.findUnique({
           where: {
             id: input.friendName,
-          },
-          include: {
-            friend: {
-              orderBy: {
-                friendName: "asc",
-              },
-            },
-            member: {
-              include: {
-                group: {
-                  include: {
-                    conten: {
-                      include: {
-                        user: true,
-                      },
-                    },
-                    member: {
-                      include: {
-                        user: true,
-                      },
-                    },
-                  },
-                },
-                chat: {
-                  include: {
-                    content: {
-                      include: {
-                        user: true,
-                      },
-                    },
-                  },
-                },
-                user: true,
-              },
-              orderBy: {
-                updatedAt: "desc",
-              },
-            },
           },
         });
 

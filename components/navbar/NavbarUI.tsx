@@ -3,17 +3,18 @@
 import { LogOutIcon, Users2 } from "lucide-react";
 
 import React from "react";
-import { api } from "@/lib/client";
 import useProfile from "@/hooks/useProfile";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { signOut } from "next-auth/react";
 import useCreateGroup from "@/hooks/useCreateGroup";
+import { type User } from "@prisma/client";
 
-const NavbarUI = () => {
-  const { data } = api.user.getUser.useQuery();
-  console.log(data);
+interface Props {
+  user: User | null;
+}
 
+const NavbarUI = ({ user }: Props) => {
   const profile = useProfile();
   const group = useCreateGroup();
   return (
@@ -24,7 +25,7 @@ const NavbarUI = () => {
       >
         <Avatar>
           <AvatarImage
-            src={data?.image || ""}
+            src={user?.image || ""}
             alt={"Profile"}
           />
           <AvatarFallback>{"K"}</AvatarFallback>

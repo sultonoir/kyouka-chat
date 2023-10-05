@@ -13,12 +13,15 @@ import useProfileFriend from "@/hooks/useProfileFriend";
 import ChatGroupBox from "../chat/ChatGroupBox";
 import useProfileGroup from "@/hooks/useProfileGroup";
 import GetProfileGroup from "./GetProfileGroup";
+import { api } from "@/lib/client";
 
 const HomeClient = () => {
+  const { data } = api.user.getUser.useQuery();
   const chat = useFriend();
   const group = useGroup();
   const profileFriend = useProfileFriend();
   const profileGroup = useProfileGroup();
+  const member = data?.member;
   return (
     <div className="flex flex-row w-full h-screen">
       <div className="basis-[30%] relative flex flex-col overflow-visible border-r border-default-200">
@@ -33,7 +36,10 @@ const HomeClient = () => {
           className="flex flex-col grow overflow-y-auto relative"
         >
           <div className="h-[1650px] relative">
-            <ChatList />
+            <ChatList
+              member={member}
+              user={data}
+            />
             <div className="absolute inset-0 -z-10 bg-bgsearch"></div>
           </div>
         </div>

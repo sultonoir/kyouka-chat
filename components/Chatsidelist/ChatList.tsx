@@ -1,47 +1,43 @@
-import { api } from "@/lib/client";
 import React from "react";
 import ChatlistPersonal from "./ChatlistPersonal";
 import ChatListGroup from "./ChatListGroup";
-import { Skeleton } from "../ui/skeleton";
+import { type User, type Chat, type Group, type Member } from "@prisma/client";
 
-const ChatList = () => {
-  const { data } = api.user.getUser.useQuery();
+interface Props {
+  member:
+    | Array<
+        Member & {
+          chat: Chat | null;
+          group: Group | null;
+        }
+      >
+    | undefined;
+  user: User | null | undefined;
+}
 
+const ChatList = ({ member, user }: Props) => {
   return (
     <div className="w-full flex flex-col">
-      {!data ? (
-        <div className="flex items-center space-x-4">
-          <Skeleton className="h-12 w-12 rounded-full bg-[#2a3942]" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-[250px] bg-[#2a3942]" />
-            <Skeleton className="h-4 w-[200px] bg-[#2a3942]" />
-          </div>
-        </div>
-      ) : (
-        <>
-          {data?.member.map((chat) => {
-            return (
-              <div key={chat.id}>
-                {chat.chatId && (
-                  <ChatlistPersonal
-                    chat={chat.chat}
-                    content={chat.chat?.content}
-                    userId={data.id}
-                    memberId={data.id}
-                  />
-                )}
-                {chat.groupId && (
-                  <ChatListGroup
-                    group={chat.group}
-                    content={chat.group?.conten}
-                    memberId={data.id}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </>
-      )}
+      <>
+        {member?.map((chat) => {
+          return (
+            <div key={chat.id}>
+              {chat.chatId && (
+                <ChatlistPersonal
+                  chat={chat.chat}
+                  userId={user?.id}
+                />
+              )}
+              {chat.groupId && (
+                <ChatListGroup
+                  group={chat.group}
+                  memberId={user?.id}
+                />
+              )}
+            </div>
+          );
+        })}
+      </>
     </div>
   );
 };
