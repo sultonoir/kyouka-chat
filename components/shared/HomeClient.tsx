@@ -27,7 +27,7 @@ const HomeClient = () => {
       <div className="basis-[30%] relative flex flex-col overflow-visible border-r border-default-200">
         <ProfileUI />
         <CreateGroup />
-        <NavbarUI />
+        <NavbarUI user={data} />
         <div className="flex flex-col max-h-max">
           <SearchChat />
         </div>

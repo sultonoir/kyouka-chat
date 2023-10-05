@@ -11,7 +11,7 @@ import useCreateGroup from "@/hooks/useCreateGroup";
 import { type User } from "@prisma/client";
 
 interface Props {
-  user: User | null;
+  user: User | null | undefined;
 }
 
 const NavbarUI = ({ user }: Props) => {
