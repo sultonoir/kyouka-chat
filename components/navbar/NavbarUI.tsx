@@ -12,6 +12,7 @@ import useCreateGroup from "@/hooks/useCreateGroup";
 
 const NavbarUI = () => {
   const { data } = api.user.getUser.useQuery();
+  console.log(data);
 
   const profile = useProfile();
   const group = useCreateGroup();

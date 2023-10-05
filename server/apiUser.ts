@@ -53,15 +53,6 @@ export const apiUser = createTRPCRouter({
         },
       },
     });
-    await ctx.prisma.user.update({
-      where: {
-        id: user?.id as string,
-      },
-      data: {
-        onlineStatus: true,
-        lastSeen: new Date(),
-      },
-    });
     return user;
   }),
   postRegister: publicProcedure
