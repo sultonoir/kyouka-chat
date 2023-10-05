@@ -26,10 +26,7 @@ export default async function RootLayout({
       className="dark"
     >
       <body className={inter.className}>
-        <SessionProvider
-          session={session}
-          baseUrl="/"
-        >
+        <SessionProvider session={session}>
           <ProvidersTRPC>
             {children}
             <Toaster />

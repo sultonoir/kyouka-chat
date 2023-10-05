@@ -5,6 +5,7 @@ import { httpBatchLink } from "@trpc/client";
 import React, { useState } from "react";
 import superjson from "superjson";
 import { api } from "./client";
+import { absoluteUrl } from "./utils";
 
 export default function ProviderTRPC({
   children,
@@ -17,7 +18,7 @@ export default function ProviderTRPC({
       transformer: superjson,
       links: [
         httpBatchLink({
-          url: "/api/trpc",
+          url: absoluteUrl("/api/trpc"),
         }),
       ],
     })
