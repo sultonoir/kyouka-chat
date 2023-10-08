@@ -46,7 +46,7 @@ const ModalUploadImage = ({ ischat }: Props) => {
       setChat("");
       setImage("");
       setOpen(false);
-      void ctx.invalidate();
+      void ctx.grup.getGroup.invalidate();
     },
   });
 
@@ -56,7 +56,7 @@ const ModalUploadImage = ({ ischat }: Props) => {
       setChat("");
       setImage("");
       setOpen(false);
-      void ctx.invalidate();
+      void ctx.chat.getConversation.invalidate();
     },
     onError: (e) => {
       setChat("");

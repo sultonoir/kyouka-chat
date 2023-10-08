@@ -20,7 +20,7 @@ const ChatForm = ({ personal }: Props) => {
   const { mutate, isLoading } = api.chat.postContent.useMutation({
     onSuccess: () => {
       setChat("");
-      void ctx.invalidate();
+      void ctx.chat.getConversation.invalidate();
     },
   });
 
@@ -28,7 +28,7 @@ const ChatForm = ({ personal }: Props) => {
     api.grup.cretaeMessage.useMutation({
       onSuccess: () => {
         setChat("");
-        void ctx.invalidate();
+        void ctx.grup.getGroup.invalidate();
       },
     });
 
